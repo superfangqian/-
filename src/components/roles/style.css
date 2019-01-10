@@ -1,0 +1,19 @@
+.breadcrumb {
+  background-color: #d4dae0;
+  line-height: 50px;
+  padding-left: 10px;
+  font-size: 16px;
+}
+.level1{
+  padding: 10px 0;
+  border-bottom: 1px dashed #ccc;
+}
+.level1:last-child{
+  border: 0;
+}
+.level2{
+  padding:0 0 10px 0;
+}
+.level3{
+  margin:0 10px 10px 0;
+}

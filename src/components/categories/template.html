@@ -1,0 +1,62 @@
+<div class="categoryes">
+  <!-- 添加分类 -->
+  <el-button type="success" plain @click="showDialog">添加分类</el-button>
+  <!-- 表格 -->
+  <el-table :data="cateList" style="width: 100%" v-loading="loading">
+    <!--
+      el-table-tree-column 组件：
+        file-icon="icon icon-file"      文件图标（叶子节点 无法展开）
+        folder-icon="icon icon-folder"  文件夹图标（可展开）
+        tree-key="cat_id"
+          表示节点的唯一标识，添加该属性后，就可以单独展开某一个分类节点
+        level-key="cat_level"
+          设置层级，设置后，一级和二级分类之间就会有缩进表示层级关系
+        :indent-size="30"
+          设置缩进大小，如果不设置，二级和三级之间没有缩进表示
+        parent-key
+          父级菜单id，不添加该key，则无法收起子菜单
+     -->
+    <el-table-tree-column tree-key="cat_id" level-key="cat_level" child-key="children" parent-key="cat_pid" label="分类名称" prop="cat_name"
+      width="220" :indent-size="30">
+      <template slot-scope="scope">
+        <span>{{ scope.row.cat_name }}</span>
+      </template>
+    </el-table-tree-column>
+    <el-table-column prop="cat_deleted" label="是否有效" width="180">
+      <template slot-scope="scope">
+        {{scope.row.cat_deleted ? '否':'是'}}
+      </template>
+    </el-table-column>
+    <el-table-column prop="cat_level" label="层级">
+    </el-table-column>
+    <el-table-column label="操作" width="235">
+      <template slot-scope="scope">
+        <el-button size="mini" type="primary" plain icon="el-icon-edit"></el-button>
+        <el-button size="mini" type="danger" plain icon="el-icon-delete"></el-button>
+      </template>
+    </el-table-column>
+  </el-table>
+
+  <!-- 分页组件 -->
+  <el-pagination background layout="prev, pager, next" :total="total" :page-size="pagesize" :current-page="pagenum" @current-change="changePage">
+  </el-pagination>
+  <!-- 添加商品对话框 -->
+  <el-dialog title="添加分类" :visible.sync="isShowCate">
+    <el-form :model="cateAddForm" label-width="100px">
+      <el-form-item label="分类名称">
+        <el-input v-model="cateAddForm.name" autocomplete="off"></el-input>
+      </el-form-item>
+      <el-form-item label="父级名称">
+        <!-- 联级选择器 -->
+        <el-cascader :options="cateAddList" change-on-select v-model="cateAddForm.catPidArr" :props="{
+          label: 'cat_name',
+          value: 'cat_id'
+        }"></el-cascader>
+      </el-form-item>
+    </el-form>
+    <div slot="footer" class="dialog-footer">
+      <el-button @click="isShowCate = false">取 消</el-button>
+      <el-button type="primary" @click="addCate">确 定</el-button>
+    </div>
+  </el-dialog>
+</div>

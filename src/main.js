@@ -12,8 +12,12 @@ import 'element-ui/lib/theme-chalk/index.css'
 import '@/assets/css/index.css'
 // 导入axios
 import axios from 'axios'
+// 导入element-tree-grid
+import ElTreeGrid from 'element-tree-grid'
 //把axios添加到原型上
 Vue.prototype.axios = axios
+// 注册为全局组件
+Vue.component(ElTreeGrid.name, ElTreeGrid)
 // axiso的基准地址
 axios.defaults.baseURL = "http://localhost:8888/api/private/v1/"
 // 请求拦截器

@@ -12,33 +12,54 @@
         </el-row>
       </el-header>
       <el-container>
+
         <el-aside width="200px" class="home-aside">
           <!--  :router="true" 启用Vue的路由模式，启用后，会以 index 值作为路由的哈希值 -->
           <el-menu
-            :default-active="activePath"
+            default-active="2"
             class="el-menu-vertical-demo"
             background-color="#545c64"
             text-color="#fff"
             active-text-color="#ffd04b"
             :router = "true"
-            :unique-opened="true"
             >
             <!-- 用户列表 -->
-            <el-submenu :index="level1.order+''" v-for = "level1 in menus" :key = "level1.id">
+            <el-submenu index="1">
               <!-- 一级导航 -->
               <template slot="title">
                 <i class="el-icon-location"></i>
-                <span>{{level1.authName}}</span>
+                <span>用户管理</span>
               </template>
-                <el-menu-item :index="'/'+level2.path" v-for = "level2 in level1.children" :key="level2.id">
+                <el-menu-item index="users">
               <!-- 二级菜单的图标和名称： -->
                   <template slot="title">
                     <i class="el-icon-menu"></i>
-                    <span>{{level2.authName}}</span>
+                    <span>用户列表</span>
                   </template>
                 </el-menu-item>
             </el-submenu>
-
+            <!-- 权限列表 -->
+            <el-submenu index="2">
+              <!-- 一级导航 -->
+              <template slot="title">
+                <i class="el-icon-location"></i>
+                <span>权限管理</span>
+              </template>
+                <el-menu-item index="roles">
+              <!-- 二级菜单的图标和名称：角色列表 -->
+                  <template slot="title">
+                    <i class="el-icon-menu"></i>
+                    <span>角色列表</span>
+                  </template>
+                </el-menu-item>
+              <!-- 二级菜单的图标和名称：权限列表 -->
+                 <el-menu-item index="rights">
+                  <template slot="title">
+                    <i class="el-icon-menu"></i>
+                    <span>权限列表</span>
+                  </template>
+                </el-menu-item>
+            </el-submenu>
           </el-menu>
         </el-aside>
 
@@ -53,16 +74,7 @@
 <script>
 export default {
   created() {
-    console.log("路由对象：", this.$route);
-
     this.getMenuList();
-  },
-  computed:{
-    activePath(){
-      const { path } = this.$route
-      const pathArr = path.split('/')
-      return pathArr.length === 3 ? '/' + pathArr[1] : path
-    }
   },
   data() {
     return {
