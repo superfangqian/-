@@ -4,14 +4,30 @@ import VueRouter from 'vue-router'
 
 // 导入组件
 import Login from '@/components/login/Login'
-import Home from '@/components/home/Home'
-import Users from '@/components/users/Users'
-import Roles from '@/components/roles/Roles'
-import Rights from '@/components/rights/Rights'
-import Categories from '@/components/categories/Categories'
-import Goods from '@/components/goods/Goods'
-import GoodsAdd from '@/components/goods-add/GoodsAdd'
-import NotFound from '@/components/404/NotFound'
+// 按需加载
+const Home = ()=> import('@/components/home/Home')
+const Users = ()=> import('@/components/users/Users')
+const Roles = ()=> import('@/components/roles/Roles')
+const Rights = ()=> import('@/components/rights/Rights')
+const Categories = ()=>import('@/components/categories/Categories')
+// const Goods = ()=>import('@/components/goods/Goods')
+// const GoodsAdd = () =>import('@/components/goods-add/GoodsAdd')
+const NotFound = () =>import('@/components/404/NotFound')
+
+// 通过特殊语法，/*webpackChunkName: "goods"*/ 可以将多个组件合并为同一个js文件输出
+// webpackChunkName 的值相同即可
+const Goods = ()=>import(/*webpackChunkName: "goods"*/ '@/components/goods/Goods')
+const GoodsAdd = () =>import(/*webpackChunkName: "goods"*/ '@/components/goods-add/GoodsAdd')
+
+// 改成按需加载的方式
+// import Home from '@/components/home/Home'
+// import Users from '@/components/users/Users'
+// import Roles from '@/components/roles/Roles'
+// import Rights from '@/components/rights/Rights'
+// import Categories from '@/components/categories/Categories'
+// import Goods from '@/components/goods/Goods'
+// import GoodsAdd from '@/components/goods-add/GoodsAdd'
+// import NotFound from '@/components/404/NotFound'
 // 安装插件
 Vue.use(VueRouter)
 

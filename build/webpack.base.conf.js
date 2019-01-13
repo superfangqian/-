@@ -31,6 +31,18 @@ module.exports = {
       ? config.build.assetsPublicPath
       : config.dev.assetsPublicPath
   },
+  // 配置CDN
+  // 告诉webpack这些文件使用了CDN,不需要打包到vender里面
+  externals:{
+    // 对象的键，vue表示导入vue包的文件
+    // 值：‘Vue"是全局暴露出来的值，相当于window.Vue
+    vue:'Vue',
+    'vue-router':'VueRouter',
+    axios:'axios',
+    'element-ui':'ELEMENT',
+    'element-tree-grid':'ElTableTreeColumn',
+    'vue-quill-editor':'VueQuillEditor'
+  },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {

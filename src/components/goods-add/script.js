@@ -1,7 +1,7 @@
 // 导入富文本编辑器样式文件：
-import 'quill/dist/quill.core.css'
-import 'quill/dist/quill.snow.css'
-import 'quill/dist/quill.bubble.css'
+// import 'quill/dist/quill.core.css'
+// import 'quill/dist/quill.snow.css'
+// import 'quill/dist/quill.bubble.css'
 import { quillEditor } from 'vue-quill-editor'
 
 
